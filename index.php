@@ -22,7 +22,6 @@
 			<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 			  <a class="nav-link active" id="v-pills-item-tab" data-toggle="pill" href="#v-pills-item" role="tab" aria-controls="v-pills-item" aria-selected="true">Item</a>
 			  <a class="nav-link" id="v-pills-purchase-tab" data-toggle="pill" href="#v-pills-purchase" role="tab" aria-controls="v-pills-purchase" aria-selected="false">Purchase</a>
-			  <a class="nav-link" id="v-pills-vendor-tab" data-toggle="pill" href="#v-pills-vendor" role="tab" aria-controls="v-pills-vendor" aria-selected="false">Vendor</a>
 			  <a class="nav-link" id="v-pills-sale-tab" data-toggle="pill" href="#v-pills-sale" role="tab" aria-controls="v-pills-sale" aria-selected="false">Sale</a>
 			  <a class="nav-link" id="v-pills-customer-tab" data-toggle="pill" href="#v-pills-customer" role="tab" aria-controls="v-pills-customer" aria-selected="false">Customer</a>
 			  <a class="nav-link" id="v-pills-search-tab" data-toggle="pill" href="#v-pills-search" role="tab" aria-controls="v-pills-search" aria-selected="false">Search</a>
@@ -111,8 +110,6 @@
 						<div id="itemImageTab" class="container-fluid tab-pane fade">
 							<br>
 							<div id="itemImageMessage"></div>
-							<p>You can upload an image for a particular item using this section.</p> 
-							<p>Please make sure the item is already added to database before uploading the image.</p>
 							<br>							
 							<form name="imageForm" id="imageForm" method="post">
 							  <div class="form-row">
@@ -174,15 +171,6 @@
 							  <label for="purchaseDetailsCurrentStock">Current Stock</label>
 							  <input type="text" class="form-control" id="purchaseDetailsCurrentStock" name="purchaseDetailsCurrentStock" readonly>
 						  </div>
-						  <div class="form-group col-md-4">
-							<label for="purchaseDetailsVendorName">Vendor Name<span class="requiredIcon">*</span></label>
-							<select id="purchaseDetailsVendorName" name="purchaseDetailsVendorName" class="form-control chosenSelect">
-								<?php 
-									require('model/vendor/getVendorNames.php');
-								?>
-							</select>
-						  </div>
-					  </div>
 					  <div class="form-row">
 						<div class="form-group col-md-2">
 						  <label for="purchaseDetailsQuantity">Quantity<span class="requiredIcon">*</span></label>
@@ -205,74 +193,7 @@
 				  </div> 
 				</div>
 			  </div>
-			  
-			  <div class="tab-pane fade" id="v-pills-vendor" role="tabpanel" aria-labelledby="v-pills-vendor-tab">
-				<div class="card card-outline-secondary my-4">
-				  <div class="card-header">Vendor Details</div>
-				  <div class="card-body">
-				  <!-- Div to show the ajax message from validations/db submission -->
-				  <div id="vendorDetailsMessage"></div>
-					 <form> 
-					  <div class="form-row">
-						<div class="form-group col-md-6">
-						  <label for="vendorDetailsVendorFullName">Full Name<span class="requiredIcon">*</span></label>
-						  <input type="text" class="form-control" id="vendorDetailsVendorFullName" name="vendorDetailsVendorFullName" placeholder="">
-						</div>
-						<div class="form-group col-md-2">
-							<label for="vendorDetailsStatus">Status</label>
-							<select id="vendorDetailsStatus" name="vendorDetailsStatus" class="form-control chosenSelect">
-								<?php include('inc/statusList.html'); ?>
-							</select>
-						</div>
-						 <div class="form-group col-md-3">
-							<label for="vendorDetailsVendorID">Vendor ID</label>
-							<input type="text" class="form-control invTooltip" id="vendorDetailsVendorID" name="vendorDetailsVendorID" title="This will be auto-generated when you add a new vendor" autocomplete="off">
-							<div id="vendorDetailsVendorIDSuggestionsDiv" class="customListDivWidth"></div>
-						</div>
-					  </div>
-					  <div class="form-row">
-						  <div class="form-group col-md-3">
-							<label for="vendorDetailsVendorMobile">Phone (mobile)<span class="requiredIcon">*</span></label>
-							<input type="text" class="form-control invTooltip" id="vendorDetailsVendorMobile" name="vendorDetailsVendorMobile" title="Do not enter leading 0">
-						  </div>
-						  <div class="form-group col-md-3">
-							<label for="vendorDetailsVendorPhone2">Phone 2</label>
-							<input type="text" class="form-control invTooltip" id="vendorDetailsVendorPhone2" name="vendorDetailsVendorPhone2" title="Do not enter leading 0">
-						  </div>
-						  <div class="form-group col-md-6">
-							<label for="vendorDetailsVendorEmail">Email</label>
-							<input type="email" class="form-control" id="vendorDetailsVendorEmail" name="vendorDetailsVendorEmail">
-						</div>
-					  </div>
-					  <div class="form-group">
-						<label for="vendorDetailsVendorAddress">Address<span class="requiredIcon">*</span></label>
-						<input type="text" class="form-control" id="vendorDetailsVendorAddress" name="vendorDetailsVendorAddress">
-					  </div>
-					  <div class="form-group">
-						<label for="vendorDetailsVendorAddress2">Address 2</label>
-						<input type="text" class="form-control" id="vendorDetailsVendorAddress2" name="vendorDetailsVendorAddress2">
-					  </div>
-					  <div class="form-row">
-						<div class="form-group col-md-6">
-						  <label for="vendorDetailsVendorCity">City</label>
-						  <input type="text" class="form-control" id="vendorDetailsVendorCity" name="vendorDetailsVendorCity">
-						</div>
-						<div class="form-group col-md-4">
-						  <label for="vendorDetailsVendorDistrict">District</label>
-						  <select id="vendorDetailsVendorDistrict" name="vendorDetailsVendorDistrict" class="form-control chosenSelect">
-							<?php include('inc/districtList.html'); ?>
-						  </select>
-						</div>
-					  </div>					  
-					  <button type="button" id="addVendor" name="addVendor" class="btn btn-success">Add Vendor</button>
-					  <button type="button" id="updateVendorDetailsButton" class="btn btn-primary">Update</button>
-					  <button type="button" id="deleteVendorButton" class="btn btn-danger">Delete</button>
-					  <button type="reset" class="btn">Clear</button>
-					 </form>
-				  </div> 
-				</div>
-			  </div>
-			    
+
 			  <div class="tab-pane fade" id="v-pills-sale" role="tabpanel" aria-labelledby="v-pills-sale-tab">
 				<div class="card card-outline-secondary my-4">
 				  <div class="card-header">Sale Details</div>
@@ -418,7 +339,7 @@
 			  
 			  <div class="tab-pane fade" id="v-pills-search" role="tabpanel" aria-labelledby="v-pills-search-tab">
 				<div class="card card-outline-secondary my-4">
-				  <div class="card-header">Search Inventory<button id="searchTablesRefresh" name="searchTablesRefresh" class="btn btn-warning float-right btn-sm">Refresh</button></div>
+				  <div class="card-header">Search <button id="searchTablesRefresh" name="searchTablesRefresh" class="btn btn-warning float-right btn-sm">Refresh</button></div>
 				  <div class="card-body">										
 					<ul class="nav nav-tabs" role="tablist">
 						<li class="nav-item">
